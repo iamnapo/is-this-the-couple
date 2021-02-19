@@ -1,3 +1,2 @@
-export { default as useSnackbar } from "./useSnackbar";
-export { default as useGlobalState } from "./useGlobalState";
+export { default as useFaceApi } from "./use-face-api";
 export const STUFF = [1, 2, 3];
