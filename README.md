@@ -6,4 +6,4 @@
 
 This website uses [face-api.js](https://github.com/justadudewhohacks/face-api.js) for facial recognition. It uses [TensorFlow.js](https://www.tensorflow.org/js) to understand if an image contains people, and, if so, which __*specific*__ people it contains.
 
-It was built by tweaking [this](https://whichbeardisthis.com/), by [Jason Lengstorf](https://twitter.com/jlengstorf) and [Gant Laborde](https://twitter.com/gantlaborde).
+It was built by tweaking [this](https://whichbeardisthis.com/) creation of [Jason Lengstorf](https://twitter.com/jlengstorf) and [Gant Laborde](https://twitter.com/gantlaborde).
