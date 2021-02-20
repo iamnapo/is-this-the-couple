@@ -17,7 +17,7 @@ jobs:
           node-version: 14
 
       - name: 📥 Download deps
-        run: bahmutov/npm-install@v1
+        uses: bahmutov/npm-install@v1
 
       - name: 🧪 Run test script
         run: npm test
