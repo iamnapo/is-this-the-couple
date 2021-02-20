@@ -1,45 +1,9 @@
-# Getting Started with Create React App
+# is-this-the-couple
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) using the [@iamnapo/cra-template](https://github.com/iamnapo/cra-template).
+> Upload an image of them and we’ll tell you which nerd you’re dealing with
 
-## Available Scripts
+[![build](https://img.shields.io/github/workflow/status/iamnapo/is-this-the-couple/ci?style=for-the-badge&logo=github&label=)](https://github.com/iamnapo/is-this-the-couple/actions)
 
-In the project directory, you can run:
+This website uses [face-api.js](https://github.com/justadudewhohacks/face-api.js) for facial recognition. It uses [TensorFlow.js](https://www.tensorflow.org/js) to understand if an image contains people, and, if so, which __*specific*__ people it contains.
 
-### `yarn start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.
-
-### `yarn test`
-
-Runs eslint & cypress e2e test.
-
-### `yarn analyze`
-
-Analyzes JavaScript bundles using the source maps. This helps you understand where code bloat is coming from.\
-More info at [https://create-react-app.dev/docs/analyzing-the-bundle-size](https://create-react-app.dev/docs/analyzing-the-bundle-size).
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. You don’t have to ever use `eject`. It‘s better to delete it from the `scripts` section of `package.json`.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+It was built by tweaking [this](https://whichbeardisthis.com/), by [Jason Lengstorf](https://twitter.com/jlengstorf) and [Gant Laborde](https://twitter.com/gantlaborde).
