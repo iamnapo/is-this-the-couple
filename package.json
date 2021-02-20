@@ -1,5 +1,5 @@
 {
-  "name": "is-this-love",
+  "name": "is-this-the-couple",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -18,7 +18,6 @@
     "react-dropzone": "^11.3.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.2",
-    "swr": "^0.4.2",
     "workbox-background-sync": "^6.1.0",
     "workbox-broadcast-update": "^6.1.0",
     "workbox-cacheable-response": "^6.1.0",
@@ -30,8 +29,7 @@
     "workbox-range-requests": "^6.1.0",
     "workbox-routing": "^6.1.0",
     "workbox-strategies": "^6.1.0",
-    "workbox-streams": "^6.1.0",
-    "zustand": "^3.3.2"
+    "workbox-streams": "^6.1.0"
   },
   "scripts": {
     "start": "react-app-rewired start",

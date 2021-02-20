@@ -1,46 +1,27 @@
-/* eslint-disable react/prop-types */
-import styled from "@emotion/styled";
+import PropTypes from "prop-types";
+import { Typography } from "@material-ui/core";
 
-const colors = {
-	lightest: "#fffdfc",
-	darkest: "#0b2055",
-	dark: "#3d4b6d",
-	light: "#eef2fd",
-	brand: "#6a2555",
+const getHeading = (isNapo, isMary, faceCount) => {
+	if (isNapo && isMary) return `Got it! This is, in fact, the lovely couple!${faceCount > 2 ? " (Amongst others.)" : ""}`;
+	if (isNapo) return `This is Napoleon!${faceCount > 1 ? " (Amongst others.)" : ""}`;
+	if (isMary) return `This is Mary!${faceCount > 1 ? " (Amongst others.)" : ""}`;
+	if (faceCount > 1) return "That’s a bunch of other people.";
+	if (faceCount === 1) return "This must be someone else.";
+	return "There’s noone is here.";
 };
 
-const Heading = styled("h1")`
-  color: ${colors.darkest};
-  font-size: 1.75rem;
-  line-height: 1.1;
-  text-align: center;
-`;
-
-const Image = styled("img")`
-  display: block;
-  margin: 1rem auto 0;
-  width: 300px;
-`;
-
-const getHeading = (isKyle, isJason) => {
-	if (isKyle && isJason) {
-		return "We can’t tell them apart either. ¯\\_(ツ)_/¯";
-	}
-
-	if (isKyle) {
-		return "This is Kyle Shevlin.";
-	}
-
-	if (isJason) {
-		return "This is Jason Lengstorf.";
-	}
-
-	return "This must be someone else.";
-};
-
-export default ({ isKyle, isJason, file }) => (
+const WhoIsIt = ({ isNapo, isMary, faceCount, file }) => (
 	<>
-		<Heading>{getHeading(isKyle, isJason)}</Heading>
-		<Image src={file} alt="uploaded file" />
+		<Typography variant="h4" align="center" fontSize="1.75rem" mt="1rem">{getHeading(isNapo, isMary, faceCount)}</Typography>
+		<img src={file} alt="uploaded file" style={{ display: "block", margin: "1rem auto", width: "50%" }} />
 	</>
 );
+
+WhoIsIt.propTypes = {
+	isNapo: PropTypes.bool.isRequired,
+	isMary: PropTypes.bool.isRequired,
+	faceCount: PropTypes.number.isRequired,
+	file: PropTypes.string.isRequired,
+};
+
+export default WhoIsIt;

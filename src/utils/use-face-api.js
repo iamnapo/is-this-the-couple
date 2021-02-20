@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as faceapi from "face-api.js";
 
 const getDistance = (reference, upload) => faceapi.utils.round(faceapi.euclideanDistance(reference.descriptor, upload.descriptor));
@@ -7,23 +7,28 @@ const FACIAL_MATCH_THRESHOLD = 0.6;
 
 const useFaceApi = () => {
 	const [loading, setLoading] = useState(true);
-	const [matches, setMatches] = useState({ isJason: false, isKyle: false });
+	const [matches, setMatches] = useState({ isMary: false, isNapo: false, faceCount: 0 });
 	const [file, setFile] = useState(null);
 	const [error, setError] = useState(false);
 
-	if (loading) {
-		Promise.all([
-			faceapi.loadSsdMobilenetv1Model("./face_model"),
-			faceapi.loadFaceLandmarkModel("./face_model"),
-			faceapi.loadFaceRecognitionModel("./face_model"),
-		]).then(() => {
-			setLoading(false);
-		});
-	}
+	useEffect(() => {
+		let isMounted = true;
+
+		(async () => {
+			await Promise.all([
+				faceapi.loadSsdMobilenetv1Model("./models"),
+				faceapi.loadFaceLandmarkModel("./models"),
+				faceapi.loadFaceRecognitionModel("./models"),
+			]);
+			if (isMounted) setLoading(false);
+		})();
+
+		return () => { isMounted = false; };
+	}, []);
 
 	const reset = () => {
 		setLoading(false);
-		setMatches({ isJason: false, isKyle: false });
+		setMatches({ isMary: false, isNapo: false, faceCount: 0 });
 		setFile(null);
 		setError(false);
 	};
@@ -39,12 +44,12 @@ const useFaceApi = () => {
 
 		// Load our two reference images and the uploaded file.
 		const images = await Promise.all(
-			["./jason-lengstorf.jpg", "./kyle-shevlin.jpg", uploadedFile].map((imgPath) => faceapi.fetchImage(imgPath)),
+			["./mary.jpg", "./napo.jpg", uploadedFile].map((imgPath) => faceapi.fetchImage(imgPath)),
 		);
 
 		// Find the faces in the uploaded images.
-		const [[jason], [kyle], faces] = await Promise.all(
-			images.map((img) => faceapi.allFacesSsdMobilenetv1(img)),
+		const [[mary], [napo], faces] = await Promise.all(
+			images.map((img) => faceapi.detectAllFaces(img, new faceapi.SsdMobilenetv1Options()).withFaceLandmarks().withFaceDescriptors()),
 		);
 
 		if (!faces[0] || !faces[0].descriptor) {
@@ -53,33 +58,17 @@ const useFaceApi = () => {
 			return;
 		}
 
-		const match = faces.find((face) => {
-			if (!face.descriptor) {
-				return false;
+		for (const face of faces) {
+			if (face.descriptor) {
+				if (getDistance(mary, face) < FACIAL_MATCH_THRESHOLD) setMatches((p) => ({ ...p, isMary: true }));
+				if (getDistance(napo, face) < FACIAL_MATCH_THRESHOLD + 0.1) setMatches((p) => ({ ...p, isNapo: true }));
 			}
-
-			const isJason = getDistance(jason, face) < FACIAL_MATCH_THRESHOLD;
-			const isKyle = getDistance(kyle, face) < FACIAL_MATCH_THRESHOLD;
-
-			if (isJason || isKyle) {
-				setError(false);
-				setLoading(false);
-				setMatches({ isJason, isKyle });
-				setFile(uploadedFile);
-
-				// Return true to stop the loop
-				return true;
-			}
-
-			// Keep looping.
-			return false;
-		});
-
-		if (!match) {
-			setLoading(false);
-			setMatches({ isJason: false, isKyle: false });
-			setFile(uploadedFile);
 		}
+
+		setMatches((p) => ({ ...p, faceCount: faces.length }));
+		setFile(uploadedFile);
+		setLoading(false);
+		setError(false);
 	};
 
 	return [{ loading, error, matches, file }, { reset, checkFace, setError }];

@@ -1,133 +1,84 @@
-/* eslint-disable react/prop-types */
-import styled from "@emotion/styled";
+import PropTypes from "prop-types";
+import { Grid } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import clsx from "clsx";
 
-import both from "../assets/images/both.jpg";
-import neither from "../assets/images/neither-1.jpg";
-import jason from "../assets/images/puppy-jason.jpg";
-import kyle from "../assets/images/headgear-kyle.jpg";
+import { mary, napo, others } from "../utils";
 
-const colors = {
-	lightest: "#fffdfc",
-	darkest: "#0b2055",
-	dark: "#3d4b6d",
-	light: "#eef2fd",
-	brand: "#6a2555",
+const useStyles = makeStyles((theme) => ({
+	examples: {
+		position: "relative",
+		marginTop: 0,
+		overflowX: "scroll",
+		"&::before": {
+			display: "none",
+			transition: "opacity 500ms linear",
+			cursor: "not-allowed",
+			borderRadius: "1rem",
+			backgroundColor: `${theme.palette.primary.lightest}dd`,
+			content: "\"\"",
+			position: "absolute",
+			top: 0,
+			left: 0,
+			bottom: 0,
+			right: 0,
+			zIndex: 10,
+		},
+	},
+	show: {
+		"&::before": {
+			display: "block",
+		},
+	},
+	image: {
+		maxHeight: "150px",
+	},
+}));
+
+const Examples = ({ loading, handleClick }) => {
+	const classes = useStyles();
+	return (
+		<Grid container spacing={4} sx={{ textAlign: "center" }} className={clsx(classes.examples, loading && classes.show)}>
+			<Grid item xs={6}>
+				<a
+					disabled={loading}
+					href="#example"
+					onClick={(event) => {
+						event.preventDefault();
+						handleClick(mary);
+					}}
+				>
+					<img className={classes.image} src={mary} alt="Choose this to see who’s in it." />
+				</a>
+			</Grid>
+			<Grid item xs={6}>
+				<a
+					disabled={loading}
+					href="#example"
+					onClick={(event) => {
+						event.preventDefault();
+						handleClick(napo);
+					}}
+				>
+					<img className={classes.image} src={napo} alt="Choose this to see who’s in it." />
+				</a>
+			</Grid>
+			<Grid item xs={6} md={6}>
+				<a
+					disabled={loading}
+					href="#example"
+					onClick={(event) => {
+						event.preventDefault();
+						handleClick(others);
+					}}
+				>
+					<img className={classes.image} src={others} alt="Choose this to see who’s in it." />
+				</a>
+			</Grid>
+		</Grid>
+	);
 };
 
-const Subheading = styled("h2")`
-  font-size: 1.5rem;
-  margin-top: 2rem;
-`;
+Examples.propTypes = { loading: PropTypes.bool.isRequired, handleClick: PropTypes.func.isRequired };
 
-const Examples = styled("div")`
-  display: flex;
-  margin-top: 0;
-  overflow-x: scroll;
-  padding: 0.5rem 0;
-  position: relative;
-  ::before {
-    background: ${colors.lightest}dd;
-    border-radius: 1rem;
-    content: ' ';
-    cursor: not-allowed;
-    bottom: 0;
-    display: ${(props) => (props.loading ? "block" : "none")};
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    transition: opacity 500ms linear;
-    z-index: 10;
-  }
-  * + * {
-    margin-top: 0;
-  }
-`;
-
-const Example = styled("img")`
-  flex: 1 80px;
-  margin: 0.5rem;
-  width: 80px;
-	* {
-    margin: 0;
-  }
-`;
-
-export default ({ loading, handleClick }) => (
-	<>
-		<Subheading>{"Don’t have a bearded nerd nearby?"}</Subheading>
-		<p>{"Click one of the images below to see how it works!"}</p>
-		<Examples loading={loading}>
-			<a
-				key="example-1"
-				disabled={loading}
-				href="#example"
-				onClick={(event) => {
-					event.preventDefault();
-					handleClick(both);
-				}}
-			>
-				<Example
-					src={both}
-					alt="Choose this to see who is in the image."
-				/>
-			</a>
-			<a
-				key="example-2"
-				disabled={loading}
-				href="#example"
-				onClick={(event) => {
-					event.preventDefault();
-					handleClick(neither);
-				}}
-			>
-				<Example
-					src={neither}
-					alt="Choose this to see who is in the image."
-				/>
-			</a>
-			<a
-				key="example-3"
-				disabled={loading}
-				href="#example"
-				onClick={(event) => {
-					event.preventDefault();
-					handleClick(jason);
-				}}
-			>
-				<Example
-					src={jason}
-					alt="Choose this to see who is in the image."
-				/>
-			</a>
-			<a
-				key="example-4"
-				disabled={loading}
-				href="#example"
-				onClick={(event) => {
-					event.preventDefault();
-					handleClick(kyle);
-				}}
-			>
-				<Example
-					src={kyle}
-					alt="Choose this to see who is in the image."
-				/>
-			</a>
-			<a
-				key="example-5"
-				disabled={loading}
-				href="#example"
-				onClick={(event) => {
-					event.preventDefault();
-					handleClick(kyle);
-				}}
-			>
-				<Example
-					src={kyle}
-					alt="Choose this to see who is in the image."
-				/>
-			</a>
-		</Examples>
-	</>
-);
+export default Examples;
