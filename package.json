@@ -1,13 +1,55 @@
 {
   "name": "is-this-the-couple",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "private": true,
+  "description": "Upload an image of them and we’ll tell you which nerd you’re dealing with",
+  "homepage": "https://github.com/iamnapo/is-this-the-couple#readme",
+  "bugs": {
+    "url": "https://github.com/iamnapo/is-this-the-couple/issues"
+  },
+  "repository": "github:iamnapo/is-this-the-couple",
+  "license": "MIT",
+  "author": {
+    "name": "Napoleon-Christos Oikonomou",
+    "email": "Napoleonoikon@gmail.com",
+    "url": "https://iamnapo.me"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "yarn lint",
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
+    "lint": "eslint . --cache"
+  },
+  "browserslist": {
+    "production": [
+      ">1%",
+      "not dead",
+      "not op_mini all",
+      "not ie > 0",
+      "not ie_mob > 0"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "prettier": "@iamnapo/prettier-config",
+  "eslintConfig": {
+    "extends": [
+      "iamnapo/with-react"
+    ],
+    "ignorePatterns": [
+      "build",
+      "coverage"
+    ]
+  },
   "dependencies": {
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.1.5",
     "@fontsource/roboto": "^4.2.1",
     "@material-ui/core": "^5.0.0-alpha.25",
-    "@material-ui/icons": "^5.0.0-alpha.24",
     "clsx": "^1.1.1",
     "customize-cra": "^1.0.0",
     "face-api.js": "^0.22.2",
@@ -31,37 +73,6 @@
     "workbox-strategies": "^6.1.0",
     "workbox-streams": "^6.1.0"
   },
-  "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "yarn lint",
-    "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "lint": "eslint . --cache"
-  },
-  "eslintConfig": {
-    "extends": [
-      "iamnapo/with-react"
-    ],
-    "ignorePatterns": [
-      "build",
-      "coverage"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">1%",
-      "not dead",
-      "not op_mini all",
-      "not ie > 0",
-      "not ie_mob > 0"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "prettier": "@iamnapo/prettier-config",
   "devDependencies": {
     "@iamnapo/prettier-config": "^1.0.2",
     "babel-plugin-import": "^1.13.3",

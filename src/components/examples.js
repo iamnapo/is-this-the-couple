@@ -3,7 +3,7 @@ import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 
-import { mary, napo, others } from "../utils";
+import { couple, mary, napo, others } from "../utils";
 
 const useStyles = makeStyles((theme) => ({
 	examples: {
@@ -38,8 +38,8 @@ const useStyles = makeStyles((theme) => ({
 const Examples = ({ loading, handleClick }) => {
 	const classes = useStyles();
 	return (
-		<Grid container spacing={4} sx={{ textAlign: "center" }} className={clsx(classes.examples, loading && classes.show)}>
-			<Grid item xs={6}>
+		<Grid container spacing={4} sx={{ textAlign: "center", placeContent: "center" }} className={clsx(classes.examples, loading && classes.show)}>
+			<Grid item xs={6} sx={{ display: "flex", placeContent: "center" }}>
 				<a
 					disabled={loading}
 					href="#example"
@@ -51,7 +51,7 @@ const Examples = ({ loading, handleClick }) => {
 					<img className={classes.image} src={mary} alt="Choose this to see who’s in it." />
 				</a>
 			</Grid>
-			<Grid item xs={6}>
+			<Grid item xs={6} sx={{ display: "flex", placeContent: "center" }}>
 				<a
 					disabled={loading}
 					href="#example"
@@ -63,7 +63,19 @@ const Examples = ({ loading, handleClick }) => {
 					<img className={classes.image} src={napo} alt="Choose this to see who’s in it." />
 				</a>
 			</Grid>
-			<Grid item xs={6} md={6}>
+			<Grid item xs={6} sx={{ display: "flex", placeContent: "center" }}>
+				<a
+					disabled={loading}
+					href="#example"
+					onClick={(event) => {
+						event.preventDefault();
+						handleClick(couple);
+					}}
+				>
+					<img className={classes.image} src={couple} alt="Choose this to see who’s in it." />
+				</a>
+			</Grid>
+			<Grid item xs={6} sx={{ display: "flex", placeContent: "center" }}>
 				<a
 					disabled={loading}
 					href="#example"

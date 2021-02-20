@@ -29,7 +29,6 @@ const theme = createMuiTheme({
 const App = () => (
 	<StyledEngineProvider injectFirst>
 		<ThemeProvider theme={theme}>
-			{/* <Header /> */}
 			<main style={{ marginTop: "1rem" }}>
 				<Switch>
 					<Suspense fallback={<LinearProgress />}>
