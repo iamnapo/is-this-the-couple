@@ -6,20 +6,23 @@ const Footer = () => (
 		<Typography align="justify" variant="body2">
 			{"This website uses "}
 			<Link href="https://github.com/justadudewhohacks/face-api.js">{"face-api.js"}</Link>
-			{" for facial recognition. It was built by "}
-			<Link href="https://iamnapo.me">{"iamnapo"}</Link>
-			{" and is largely based upon "}
-			<Link href="https://www.youtube.com/watch?v=PNEDvkKcXf0&amp;list=PLz8Iz-Fnk_eTpvd49Sa77NiF8Uqq5Iykx&amp;index=2">{"this"}</Link>
-			{" livestream by "}
+			{" for facial recognition. It uses "}
+			<Link href="https://www.tensorflow.org/js">{"TensorFlow.js"}</Link>
+			{" to understand if an image contains people, and, if so, which "}
+			<strong>{"specific"}</strong>
+			{" people it contains. It was built by tweaking "}
+			<Link href="https://whichbeardisthis.com/">{"this"}</Link>
+			{", by "}
 			<Link href="https://twitter.com/jlengstorf">{"Jason Lengstorf"}</Link>
 			{" and "}
 			<Link href="https://twitter.com/gantlaborde">{"Gant Laborde"}</Link>
 			{"."}
 		</Typography>
 		<Typography mt="2rem" align="center" variant="body2">
-			<Link href="https://github.com/iamnapo/is-this-the-couple">{"source code"}</Link>
+			{"Made with ❤️ by "}
+			<Link href="https:/iamnapo.me">{"Napoleon"}</Link>
 			{" · "}
-			<Link href="https://whichbeardisthis.com">{"whichbeardisthis.com"}</Link>
+			<Link href="https://github.com/iamnapo/is-this-the-couple">{"source code"}</Link>
 		</Typography>
 	</Box>
 );

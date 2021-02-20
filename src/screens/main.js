@@ -27,7 +27,7 @@ const Home = () => {
 	const [{ loading, error, matches, file }, { reset, checkFace, setError }] = useFaceApi();
 
 	return (
-		<>
+		<main>
 			{!file && (
 				<>
 					<Typography align="justify">
@@ -61,7 +61,7 @@ const Home = () => {
 					<Examples handleClick={checkFace} loading={loading} />
 				</>
 			)}
-		</>
+		</main>
 	);
 };
 
