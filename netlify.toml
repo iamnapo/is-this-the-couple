@@ -12,5 +12,9 @@ status = 200
 for = "/*.pdf"
 values = { Cache-Control = "no-store" }
 
+[[headers]]
+for = "/models/*"
+values = { Cache-Control = "public,max-age=365000000,immutable" }
+
 [build.environment]
 SKIP_PREFLIGHT_CHECK = "true"
