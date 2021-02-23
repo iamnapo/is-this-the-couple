@@ -11,7 +11,8 @@ const useStyles = makeStyles((theme) => ({
 	reset: {
 		width: "50%",
 		margin: "1rem auto",
-		display: "block",
+		display: "flex",
+		justifyContent: "center",
 	},
 	error: {
 		textAlign: "center",
@@ -27,6 +28,7 @@ const Home = () => {
 	const classes = useStyles();
 	const [{ loading, error, matches, file }, { reset, checkFace, setError, loadModels }] = useFaceApi();
 	const [modelsLoaded, setModelsLoaded] = useState(false);
+	const [modelsLoading, setModelsLoading] = useState(false);
 
 	return (
 		<main>
@@ -47,7 +49,20 @@ const Home = () => {
 				</>
 			)}
 			{!modelsLoaded && (
-				<Button variant="contained" size="small" type="reset" onClick={() => loadModels().then(() => setModelsLoaded(true))} className={classes.reset}>
+				<Button
+					disabled={modelsLoading}
+					variant="contained"
+					size="small"
+					type="reset"
+					onClick={() => {
+						setModelsLoading(true);
+						loadModels().then(() => {
+							setModelsLoaded(true);
+							setModelsLoading(false);
+						});
+					}}
+					className={classes.reset}
+				>
 					{"Load the models!"}
 				</Button>
 			)}
@@ -62,10 +77,10 @@ const Home = () => {
 				</>
 			) : (
 				<>
-					<DropArea handleDrop={checkFace} handleError={setError} loading={loading} />
+					<DropArea handleDrop={checkFace} handleError={setError} loading={loading} modelsLoaded={modelsLoaded || modelsLoading} />
 					<Typography align="justify" variant="h5" gutterBottom sx={{ mt: "2rem", fontWeight: "bold" }}>{"Don’t have a lovely couple nearby?"}</Typography>
 					<Typography align="justify">{"Click one of the images below to see how it works!"}</Typography>
-					<Examples handleClick={checkFace} loading={loading} />
+					<Examples handleClick={checkFace} loading={loading || !(modelsLoaded || modelsLoading)} />
 				</>
 			)}
 		</main>

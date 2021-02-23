@@ -33,9 +33,16 @@ const useFaceApi = () => {
 		}
 
 		// Load our two reference images and the uploaded file.
-		const images = await Promise.all(
-			["./mary.jpg", "./napo.jpg", uploadedFile].map((imgPath) => faceapi.fetchImage(imgPath)),
-		);
+		let images = [];
+		try {
+			images = await Promise.all(
+				["./mary.jpg", "./napo.jpg", uploadedFile].map((imgPath) => faceapi.fetchImage(imgPath)),
+			);
+		} catch {
+			setError("There was an error with the uploaded file.  Only JPG and PNG images are accepted.");
+			setLoading(false);
+			return;
+		}
 
 		// Find the faces in the uploaded images.
 		const [[mary], [napo], faces] = await Promise.all(
