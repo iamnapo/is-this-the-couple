@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import * as faceapi from "face-api.js";
 
 const getDistance = (reference, upload) => faceapi.utils.round(faceapi.euclideanDistance(reference.descriptor, upload.descriptor));
@@ -10,21 +10,11 @@ const useFaceApi = () => {
 	const [matches, setMatches] = useState({ isMary: false, isNapo: false, faceCount: 0 });
 	const [file, setFile] = useState(null);
 	const [error, setError] = useState(false);
-
-	useEffect(() => {
-		let isMounted = true;
-
-		(async () => {
-			await Promise.all([
-				faceapi.loadSsdMobilenetv1Model("./models"),
-				faceapi.loadFaceLandmarkModel("./models"),
-				faceapi.loadFaceRecognitionModel("./models"),
-			]);
-			if (isMounted) setLoading(false);
-		})();
-
-		return () => { isMounted = false; };
-	}, []);
+	const loadModels = useCallback(() => Promise.all([
+		faceapi.loadSsdMobilenetv1Model("./models"),
+		faceapi.loadFaceLandmarkModel("./models"),
+		faceapi.loadFaceRecognitionModel("./models"),
+	]).then(() => setLoading(false)), []);
 
 	const reset = () => {
 		setLoading(false);
@@ -74,7 +64,7 @@ const useFaceApi = () => {
 		setError(false);
 	};
 
-	return [{ loading, error, matches, file }, { reset, checkFace, setError }];
+	return [{ loading, error, matches, file }, { reset, checkFace, setError, loadModels }];
 };
 
 export default useFaceApi;

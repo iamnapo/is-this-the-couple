@@ -1,5 +1,6 @@
 import { Button, Link, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { useState } from "react";
 
 import { useFaceApi } from "../utils";
 import DropArea from "../components/drop-area";
@@ -24,7 +25,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Home = () => {
 	const classes = useStyles();
-	const [{ loading, error, matches, file }, { reset, checkFace, setError }] = useFaceApi();
+	const [{ loading, error, matches, file }, { reset, checkFace, setError, loadModels }] = useFaceApi();
+	const [modelsLoaded, setModelsLoaded] = useState(false);
 
 	return (
 		<main>
@@ -43,6 +45,11 @@ const Home = () => {
 						{" Upload an image of them and we’ll tell you which nerd you’re dealing with."}
 					</Typography>
 				</>
+			)}
+			{!modelsLoaded && (
+				<Button variant="contained" size="small" type="reset" onClick={() => loadModels().then(() => setModelsLoaded(true))} className={classes.reset}>
+					{"Load the models!"}
+				</Button>
 			)}
 			{error && <Typography className={classes.error}>{error}</Typography>}
 			{file ? (
