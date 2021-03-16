@@ -1,12 +1,9 @@
-[build]
-base = ''
-command = 'npm run build'
-publish = 'build'
+[dev]
+command = "npm run dev"
 
-[[redirects]]
-from = "/*"
-to = "/index.html"
-status = 200
+[build]
+command = "npm run build"
+publish = "out"
 
 [[headers]]
 for = "/*.pdf"
@@ -15,6 +12,3 @@ values = { Cache-Control = "no-store" }
 [[headers]]
 for = "/models/*"
 values = { Cache-Control = "public,max-age=365000000,immutable" }
-
-[build.environment]
-SKIP_PREFLIGHT_CHECK = "true"

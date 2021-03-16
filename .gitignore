@@ -59,5 +59,13 @@ typings/
 .env
 .env.test
 
-# build directory
-build
+# next.js
+.next/
+out/
+public/workbox-*.js
+public/workbox-*.js.map
+public/sw.js
+public/sw.js.map
+
+# Local Netlify folder
+.netlify
