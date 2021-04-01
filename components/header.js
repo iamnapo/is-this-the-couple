@@ -7,7 +7,7 @@ const Header = () => {
 	return (
 		<header style={{ textAlign: "center" }}>
 			<Link href="/" onClick={reset}>
-				<img src="https://res.cloudinary.com/iamnapo/image/upload/q_auto,f_auto/is-this-the-couple/logo.webp" alt="Is this the couple?" style={{ maxWidth: "600px", width: "100%" }} />
+				<img src="https://res.cloudinary.com/iamnapo/image/upload/q_auto,f_auto/is-this-the-couple/logo" alt="Is this the couple?" style={{ maxWidth: "600px", width: "100%" }} />
 			</Link>
 		</header>
 	);
