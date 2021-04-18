@@ -1,7 +1,16 @@
 import { useCallback, useState } from "react";
-import * as faceapi from "face-api.js";
+import {
+	utils,
+	euclideanDistance,
+	loadSsdMobilenetv1Model,
+	loadFaceLandmarkModel,
+	loadFaceRecognitionModel,
+	fetchImage,
+	detectAllFaces,
+	SsdMobilenetv1Options,
+} from "face-api.js";
 
-const getDistance = (reference, upload) => faceapi.utils.round(faceapi.euclideanDistance(reference.descriptor, upload.descriptor));
+const getDistance = (reference, upload) => utils.round(euclideanDistance(reference.descriptor, upload.descriptor));
 
 const FACIAL_MATCH_THRESHOLD = 0.6;
 
@@ -11,9 +20,9 @@ const useFaceApi = () => {
 	const [file, setFile] = useState(null);
 	const [error, setError] = useState(false);
 	const loadModels = useCallback(() => Promise.all([
-		faceapi.loadSsdMobilenetv1Model("./models"),
-		faceapi.loadFaceLandmarkModel("./models"),
-		faceapi.loadFaceRecognitionModel("./models"),
+		loadSsdMobilenetv1Model("./models"),
+		loadFaceLandmarkModel("./models"),
+		loadFaceRecognitionModel("./models"),
 	]).then(() => setLoading(false)), []);
 
 	const reset = () => {
@@ -35,9 +44,7 @@ const useFaceApi = () => {
 		// Load our two reference images and the uploaded file.
 		let images = [];
 		try {
-			images = await Promise.all(
-				["./mary.jpg", "./napo.jpg", uploadedFile].map((imgPath) => faceapi.fetchImage(imgPath)),
-			);
+			images = await Promise.all(["./mary.jpg", "./napo.jpg", uploadedFile].map(fetchImage));
 		} catch {
 			setError("There was an error with the uploaded file.  Only JPG and PNG images are accepted.");
 			setLoading(false);
@@ -46,7 +53,7 @@ const useFaceApi = () => {
 
 		// Find the faces in the uploaded images.
 		const [[mary], [napo], faces] = await Promise.all(
-			images.map((img) => faceapi.detectAllFaces(img, new faceapi.SsdMobilenetv1Options()).withFaceLandmarks().withFaceDescriptors()),
+			images.map((img) => detectAllFaces(img, new SsdMobilenetv1Options()).withFaceLandmarks().withFaceDescriptors()),
 		);
 
 		if (!faces[0] || !faces[0].descriptor) {

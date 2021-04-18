@@ -77,7 +77,12 @@ const Home = () => {
 				</>
 			) : (
 				<>
-					<DropArea handleDrop={checkFace} handleError={setError} loading={loading} modelsLoaded={modelsLoaded || modelsLoading} />
+					<DropArea
+						handleDrop={checkFace}
+						handleError={setError}
+						loading={loading}
+						modelsLoaded={modelsLoaded || modelsLoading}
+					/>
 					<Typography align="justify" variant="h5" gutterBottom sx={{ mt: "2rem", fontWeight: "bold" }}>{"Don’t have a lovely couple nearby?"}</Typography>
 					<Typography align="justify">{"Click one of the images below to see how it works!"}</Typography>
 					<Examples handleClick={checkFace} loading={loading || !(modelsLoaded || modelsLoading)} />
