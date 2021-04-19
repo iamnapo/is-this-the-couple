@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { utils, euclideanDistance, nets, fetchImage, detectAllFaces } from "face-api.js";
+import { utils, euclideanDistance, nets, fetchImage, detectAllFaces, TinyFaceDetectorOptions } from "face-api.js";
 
 const getDistance = (ref, upload) => utils.round(euclideanDistance(ref.descriptor, upload.descriptor));
 
@@ -11,8 +11,8 @@ const useFaceApi = () => {
 	const [file, setFile] = useState(null);
 	const [error, setError] = useState(false);
 	const loadModels = useCallback(() => Promise.all([
-		nets.ssdMobilenetv1.loadFromUri("/models/"),
-		nets.faceLandmark68Net.loadFromUri("/models/"),
+		nets.tinyFaceDetector.loadFromUri("/models/"),
+		nets.faceLandmark68TinyNet.loadFromUri("/models/"),
 		nets.faceRecognitionNet.loadFromUri("/models/"),
 	]).then(() => setLoading(false)), []);
 
@@ -44,7 +44,7 @@ const useFaceApi = () => {
 
 		// Find the faces in the uploaded images.
 		const [[mary], [napo], faces] = await Promise.all(
-			images.map((img) => detectAllFaces(img).withFaceLandmarks().withFaceDescriptors()),
+			images.map((img) => detectAllFaces(img, new TinyFaceDetectorOptions()).withFaceLandmarks(true).withFaceDescriptors()),
 		);
 
 		if (!faces[0] || !faces[0].descriptor) {
