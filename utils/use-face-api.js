@@ -1,16 +1,7 @@
 import { useCallback, useState } from "react";
-import {
-	utils,
-	euclideanDistance,
-	loadSsdMobilenetv1Model,
-	loadFaceLandmarkModel,
-	loadFaceRecognitionModel,
-	fetchImage,
-	detectAllFaces,
-	SsdMobilenetv1Options,
-} from "face-api.js";
+import { utils, euclideanDistance, nets, fetchImage, detectAllFaces } from "face-api.js";
 
-const getDistance = (reference, upload) => utils.round(euclideanDistance(reference.descriptor, upload.descriptor));
+const getDistance = (ref, upload) => utils.round(euclideanDistance(ref.descriptor, upload.descriptor));
 
 const FACIAL_MATCH_THRESHOLD = 0.6;
 
@@ -20,9 +11,9 @@ const useFaceApi = () => {
 	const [file, setFile] = useState(null);
 	const [error, setError] = useState(false);
 	const loadModels = useCallback(() => Promise.all([
-		loadSsdMobilenetv1Model("./models"),
-		loadFaceLandmarkModel("./models"),
-		loadFaceRecognitionModel("./models"),
+		nets.ssdMobilenetv1.loadFromUri("/models/"),
+		nets.faceLandmark68Net.loadFromUri("/models/"),
+		nets.faceRecognitionNet.loadFromUri("/models/"),
 	]).then(() => setLoading(false)), []);
 
 	const reset = () => {
@@ -53,7 +44,7 @@ const useFaceApi = () => {
 
 		// Find the faces in the uploaded images.
 		const [[mary], [napo], faces] = await Promise.all(
-			images.map((img) => detectAllFaces(img, new SsdMobilenetv1Options()).withFaceLandmarks().withFaceDescriptors()),
+			images.map((img) => detectAllFaces(img).withFaceLandmarks().withFaceDescriptors()),
 		);
 
 		if (!faces[0] || !faces[0].descriptor) {
