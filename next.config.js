@@ -13,7 +13,6 @@ module.exports = withPWA({
 	},
 	experimental: {
 		optimizeCss: true,
-		optimizeFonts: true,
 		optimizeImages: true,
 	},
 	webpack: (config, { isServer }) => {
