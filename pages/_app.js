@@ -1,7 +1,7 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 import Head from "next/head";
-import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import { CacheProvider } from "@emotion/react";
 import { CssBaseline } from "@material-ui/core";
 import createCache from "@emotion/cache";
@@ -11,7 +11,7 @@ import "../styles/index.scss";
 import Header from "../components/header";
 import Footer from "../components/footer";
 
-const theme = createMuiTheme({
+const theme = createTheme({
 	palette: {
 		primary: {
 			main: "#6a2555",

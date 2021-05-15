@@ -57,7 +57,7 @@ const useFaceApi = () => {
 			if (face.descriptor) {
 				if (getDistance(mary, face) < FACIAL_MATCH_THRESHOLD) {
 					setMatches((p) => ({ ...p, isMary: true }));
-				} else if (getDistance(napo, face) < FACIAL_MATCH_THRESHOLD + 0.1) {
+				} else if (getDistance(napo, face) < FACIAL_MATCH_THRESHOLD) {
 					setMatches((p) => ({ ...p, isNapo: true }));
 				}
 			}
