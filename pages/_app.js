@@ -33,7 +33,8 @@ const theme = createTheme({
 		].join(","),
 	},
 });
-export const cache = createCache({ key: "css", prepend: true });
+
+const cache = createCache({ key: "css", prepend: true });
 
 const App = (props) => {
 	const { Component, pageProps } = props;
