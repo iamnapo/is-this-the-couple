@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useDropzone } from "react-dropzone";
 import { Box, CircularProgress, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/styles";
 import { useCallback } from "react";
 import clsx from "clsx";
 

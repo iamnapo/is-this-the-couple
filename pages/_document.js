@@ -16,6 +16,11 @@ export default class Document extends NextDocument {
 		return (
 			<Html lang="en">
 				<Head>
+					<link rel="preconnect" href="https://fonts.gstatic.com" />
+					<link
+						href="https://fonts.googleapis.com/css2?family=Dosis&display=swap"
+						rel="stylesheet"
+					/>
 					<meta charSet="utf-8" />
 					<meta name="description" content="Upload an image of them and we’ll tell you which nerd you’re dealing with." />
 					<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
@@ -62,10 +67,6 @@ Document.getInitialProps = async (ctx) => {
 
 	return {
 		...initialProps,
-		styles: [
-			...React.Children.toArray(initialProps.styles),
-			sheets.getStyleElement(),
-			...emotionStyleTags,
-		],
+		styles: [...React.Children.toArray(initialProps.styles), sheets.getStyleElement(), ...emotionStyleTags],
 	};
 };
