@@ -1,28 +1,9 @@
 import PropTypes from "prop-types";
 import { useDropzone } from "react-dropzone";
 import { Box, CircularProgress, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
 import { useCallback } from "react";
-import clsx from "clsx";
-
-const useStyles = makeStyles((theme) => ({
-	dropArea: {
-		border: "2px dashed",
-		borderColor: theme.palette.primary.darkest,
-		borderRadius: "1rem",
-		placeContent: "center",
-		display: "flex",
-		marginTop: "2rem",
-		padding: "2rem",
-		"&:focus": {
-			boxShadow: `0 0 3pt 2pt ${theme.palette.primary.darkest}`,
-			outline: "none",
-		},
-	},
-}));
 
 const DropArea = ({ handleDrop, handleError, loading = false, modelsLoaded = false }) => {
-	const classes = useStyles();
 	const onDrop = useCallback((accepted) => {
 		const file = accepted[0];
 		const reader = new FileReader();
@@ -35,7 +16,22 @@ const DropArea = ({ handleDrop, handleError, loading = false, modelsLoaded = fal
 	}, [handleDrop, handleError]);
 	const { getRootProps, getInputProps } = useDropzone({ onDrop, disabled: loading || !modelsLoaded, maxFiles: 1 });
 	return (
-		<Box {...getRootProps({ className: clsx(classes.dropArea, "dropzone", (loading || !modelsLoaded) && "disabled") })}>
+		<Box
+			sx={{
+				border: "2px dashed",
+				borderColor: "primary.darkest",
+				borderRadius: "1rem",
+				placeContent: "center",
+				display: "flex",
+				marginTop: "2rem",
+				padding: "2rem",
+				"&:focus": {
+					boxShadow: (t) => `0 0 3pt 2pt ${t.palette.primary.darkest}`,
+					outline: "none",
+				},
+			}}
+			{...getRootProps()}
+		>
 			{modelsLoaded
 				? loading
 					? <CircularProgress disableShrink />

@@ -1,5 +1,4 @@
 import { Button, Link, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
 import { useState } from "react";
 
 import { useFaceApi } from "../utils";
@@ -7,25 +6,7 @@ import DropArea from "../components/drop-area";
 import Examples from "../components/examples";
 import WhoIsIt from "../components/who-is-it";
 
-const useStyles = makeStyles((theme) => ({
-	reset: {
-		width: "50%",
-		margin: "1rem auto",
-		display: "flex",
-		justifyContent: "center",
-	},
-	error: {
-		textAlign: "center",
-		border: "2px solid red",
-		borderRadius: "0.25rem",
-		padding: "1rem",
-		color: theme.palette.primary.darkest,
-		backgroundColor: "rgba(255 0 0 / 0.05)",
-	},
-}));
-
 const Home = () => {
-	const classes = useStyles();
 	const [{ loading, error, matches, file }, { reset, checkFace, setError, loadModels }] = useFaceApi();
 	const [modelsLoaded, setModelsLoaded] = useState(false);
 	const [modelsLoading, setModelsLoading] = useState(false);
@@ -61,17 +42,45 @@ const Home = () => {
 							setModelsLoading(false);
 						});
 					}}
-					className={classes.reset}
+					sx={{
+						width: "50%",
+						m: "1rem auto",
+						display: "flex",
+						justifyContent: "center",
+					}}
 				>
 					{"Load the models!"}
 				</Button>
 			)}
-			{error && <Typography className={classes.error}>{error}</Typography>}
+			{error && (
+				<Typography sx={{
+					textAlign: "center",
+					border: "2px solid red",
+					borderRadius: "0.25rem",
+					padding: "1rem",
+					color: "primary.darkest",
+					bgcolor: "rgba(255 0 0 / 0.05)",
+				}}
+				>
+					{error}
+				</Typography>
+			)}
 			{file ? (
 				<>
 					{!error && <WhoIsIt {...matches} file={file} />}
 					<Typography align="center">{"See another couple nearby?"}</Typography>
-					<Button variant="contained" size="small" type="reset" onClick={reset} className={classes.reset}>
+					<Button
+						variant="contained"
+						size="small"
+						type="reset"
+						onClick={reset}
+						sx={{
+							width: "50%",
+							m: "1rem auto",
+							display: "flex",
+							justifyContent: "center",
+						}}
+					>
 						{"Start over!"}
 					</Button>
 				</>
