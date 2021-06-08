@@ -1,7 +1,4 @@
 import { useCallback, useState } from "react";
-import { utils, euclideanDistance, nets, fetchImage, detectAllFaces, TinyFaceDetectorOptions } from "face-api.js";
-
-const getDistance = (ref, upload) => utils.round(euclideanDistance(ref.descriptor, upload.descriptor));
 
 const FACIAL_MATCH_THRESHOLD = 0.6;
 
@@ -10,11 +7,11 @@ const useFaceApi = () => {
 	const [matches, setMatches] = useState({ isMary: false, isNapo: false, faceCount: 0 });
 	const [file, setFile] = useState(null);
 	const [error, setError] = useState(false);
-	const loadModels = useCallback(() => Promise.all([
+	const loadModels = useCallback(() => import("face-api.js").then(({ nets }) => Promise.all([
 		nets.tinyFaceDetector.loadFromUri("/models/"),
 		nets.faceLandmark68TinyNet.loadFromUri("/models/"),
 		nets.faceRecognitionNet.loadFromUri("/models/"),
-	]).then(() => setLoading(false)), []);
+	])).then(() => setLoading(false)), []);
 
 	const reset = () => {
 		setLoading(false);
@@ -31,6 +28,8 @@ const useFaceApi = () => {
 			setLoading(false);
 			return;
 		}
+
+		const { utils, euclideanDistance, fetchImage, detectAllFaces, TinyFaceDetectorOptions } = await import("face-api.js");
 
 		// Load our two reference images and the uploaded file.
 		let images = [];
@@ -52,6 +51,8 @@ const useFaceApi = () => {
 			setFile(uploadedFile);
 			return;
 		}
+
+		const getDistance = (ref, upload) => utils.round(euclideanDistance(ref.descriptor, upload.descriptor));
 
 		for (const face of faces) {
 			if (face.descriptor) {
