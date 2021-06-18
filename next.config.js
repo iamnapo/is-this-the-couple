@@ -7,13 +7,13 @@ module.exports = withPWA({
 	},
 	poweredByHeader: false,
 	reactStrictMode: true,
-	target: "experimental-serverless-trace",
-	future: {
-		webpack5: true,
-	},
+	target: "serverless",
 	experimental: {
 		optimizeCss: true,
 		optimizeImages: true,
+	},
+	eslint: {
+		ignoreDuringBuilds: true,
 	},
 	webpack: (config, { isServer }) => {
 		if (!isServer) config.resolve.fallback.fs = false;
