@@ -11,6 +11,7 @@ module.exports = withPWA({
 	experimental: {
 		optimizeCss: true,
 		optimizeImages: true,
+		esmExternals: true,
 	},
 	eslint: {
 		ignoreDuringBuilds: true,
