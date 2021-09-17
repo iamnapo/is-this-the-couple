@@ -1,9 +1,9 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 import Head from "next/head";
-import { ThemeProvider, createTheme } from "@material-ui/core/styles";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { CacheProvider } from "@emotion/react";
-import { CssBaseline } from "@material-ui/core";
+import { CssBaseline } from "@mui/material";
 import createCache from "@emotion/cache";
 
 import "../styles/index.scss";

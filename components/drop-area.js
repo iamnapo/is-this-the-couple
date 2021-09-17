@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useDropzone } from "react-dropzone";
-import { Box, CircularProgress, Typography } from "@material-ui/core";
+import { Box, CircularProgress, Typography } from "@mui/material";
 import { useCallback } from "react";
 
 const DropArea = ({ handleDrop, handleError, loading = false, modelsLoaded = false }) => {

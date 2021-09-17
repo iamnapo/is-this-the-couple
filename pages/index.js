@@ -1,4 +1,4 @@
-import { Button, Link, Typography } from "@material-ui/core";
+import { Button, Link, Typography } from "@mui/material";
 import { useState } from "react";
 
 import { useFaceApi } from "../utils";

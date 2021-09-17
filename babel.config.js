@@ -3,7 +3,7 @@ module.exports = function (api) {
 	return {
 		presets: ["next/babel"],
 		plugins: [
-			["import", { libraryName: "@material-ui/core", libraryDirectory: "", camel2DashComponentName: false }, "core"],
+			["import", { libraryName: "@mui/material", libraryDirectory: "", camel2DashComponentName: false }, "core"],
 		],
 	};
 };

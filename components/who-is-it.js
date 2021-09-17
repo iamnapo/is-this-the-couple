@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 
 const getHeading = (isNapo, isMary, faceCount) => {
 	if (isNapo && isMary) return `Got it! This is, in fact, the lovely couple!${faceCount > 2 ? " (Amongst others.)" : ""}`;

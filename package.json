@@ -56,8 +56,8 @@
 		"@emotion/react": "^11.4.1",
 		"@emotion/server": "^11.4.0",
 		"@emotion/styled": "^11.3.0",
-		"@material-ui/core": "^5.0.0-beta.5",
-		"@material-ui/styles": "^5.0.0-beta.5",
+		"@mui/material": "^5.0.0",
+		"@mui/styles": "^5.0.0",
 		"critters": "^0.0.10",
 		"face-api.js": "^0.22.2",
 		"next": "^11.1.2",
@@ -65,7 +65,7 @@
 		"prop-types": "^15.7.2",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
-		"react-dropzone": "^11.3.4"
+		"react-dropzone": "^11.4.0"
 	},
 	"devDependencies": {
 		"@iamnapo/prettier-config": "^1.0.3",
@@ -74,10 +74,10 @@
 		"eslint-config-iamnapo": "^16.1.0",
 		"eslint-plugin-import": "^2.24.2",
 		"eslint-plugin-jsx-a11y": "^6.4.1",
-		"eslint-plugin-react": "^7.25.1",
+		"eslint-plugin-react": "^7.25.2",
 		"eslint-plugin-react-hooks": "^4.2.0",
-		"eslint-plugin-unicorn": "^35.0.0",
-		"sass": "^1.39.0"
+		"eslint-plugin-unicorn": "^36.0.0",
+		"sass": "^1.41.1"
 	},
 	"engines": {
 		"node": ">=14"

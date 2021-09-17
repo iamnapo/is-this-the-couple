@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { Box, Grid } from "@material-ui/core";
+import { Box, Grid } from "@mui/material";
 
 import { couple, mary, napo, others } from "../utils";
 
