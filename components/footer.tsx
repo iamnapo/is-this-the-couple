@@ -1,8 +1,10 @@
 import { Box, Link, Typography } from "@mui/material";
 
-const Footer = () => (
+const Footer = (): JSX.Element => (
 	<Box component="footer" mt="2rem" textAlign="justify">
-		<Typography variant="h5" gutterBottom sx={{ fontWeight: "bold" }}>{"What is this site?"}</Typography>
+		<Typography variant="h5" gutterBottom sx={{ fontWeight: "bold" }}>
+			{"What is this site?"}
+		</Typography>
 		<Typography variant="body2">
 			{"This website uses "}
 			<Link href="https://github.com/justadudewhohacks/face-api.js">{"face-api.js"}</Link>

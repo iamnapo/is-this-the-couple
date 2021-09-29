@@ -12,15 +12,12 @@ const getCache = () => {
 };
 
 export default class Document extends NextDocument {
-	render() {
+	override render(): JSX.Element {
 		return (
 			<Html lang="en">
 				<Head>
 					<link rel="preconnect" href="https://fonts.gstatic.com" />
-					<link
-						href="https://fonts.googleapis.com/css2?family=Dosis&display=swap"
-						rel="stylesheet"
-					/>
+					<link href="https://fonts.googleapis.com/css2?family=Dosis&display=swap" rel="stylesheet" />
 					<meta charSet="utf-8" />
 					<meta name="description" content="Upload an image of them and we’ll tell you which nerd you’re dealing with." />
 					<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
@@ -43,7 +40,7 @@ Document.getInitialProps = async (ctx) => {
 	const originalRenderPage = ctx.renderPage;
 
 	const cache = getCache();
-	const { extractCriticalToChunks } = createEmotionServer(cache);
+	const emotionServer = createEmotionServer(cache);
 
 	ctx.renderPage = () => originalRenderPage({
 		enhanceApp: (App) => (props) => sheets.collect(<App {...props} />),
@@ -55,7 +52,7 @@ Document.getInitialProps = async (ctx) => {
 	});
 
 	const initialProps = await NextDocument.getInitialProps(ctx);
-	const emotionStyles = extractCriticalToChunks(initialProps.html);
+	const emotionStyles = emotionServer.extractCriticalToChunks(initialProps.html);
 	const emotionStyleTags = emotionStyles.styles.map((style) => (
 		<style
 			data-emotion={`${style.key} ${style.ids.join(" ")}`}

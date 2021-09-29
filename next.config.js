@@ -1,6 +1,9 @@
 const withPWA = require("next-pwa");
 
-module.exports = withPWA({
+/**
+ * @type {import("next/dist/server/config").NextConfig}
+ */
+const config = {
 	pwa: {
 		dest: "public",
 		disable: process.env.NODE_ENV !== "production",
@@ -20,4 +23,7 @@ module.exports = withPWA({
 		if (!isServer) config.resolve.fallback.fs = false;
 		return config;
 	},
-});
+	generateBuildId: () => "build",
+};
+
+module.exports = withPWA(config);

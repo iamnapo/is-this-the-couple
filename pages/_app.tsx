@@ -1,6 +1,6 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import Head from "next/head";
+import { AppProps } from "next/app";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { CacheProvider } from "@emotion/react";
 import { CssBaseline } from "@mui/material";
@@ -15,8 +15,6 @@ const theme = createTheme({
 	palette: {
 		primary: {
 			main: "#6a2555",
-			darkest: "#0b2055",
-			lightest: "#fffdfc",
 			light: "#eef2fd",
 		},
 		secondary: {
@@ -24,21 +22,13 @@ const theme = createTheme({
 		},
 	},
 	typography: {
-		fontFamily: [
-			"Dosis",
-			"-apple-system",
-			"BlinkMacSystemFont",
-			"Arial",
-			"sans-serif",
-		].join(","),
+		fontFamily: ["Dosis", "-apple-system", "BlinkMacSystemFont", "Arial", "sans-serif"].join(","),
 	},
 });
 
 const cache = createCache({ key: "css", prepend: true });
 
-const App = (props) => {
-	const { Component, pageProps } = props;
-
+const App = ({ Component, pageProps }: AppProps): JSX.Element => {
 	React.useEffect(() => {
 		const jssStyles = document.querySelector("#jss-server-side");
 		if (jssStyles) jssStyles.remove();
@@ -58,11 +48,6 @@ const App = (props) => {
 			</ThemeProvider>
 		</CacheProvider>
 	);
-};
-
-App.propTypes = {
-	Component: PropTypes.elementType.isRequired,
-	pageProps: PropTypes.object.isRequired,
 };
 
 export default App;

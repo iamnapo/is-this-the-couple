@@ -6,7 +6,7 @@ import DropArea from "../components/drop-area";
 import Examples from "../components/examples";
 import WhoIsIt from "../components/who-is-it";
 
-const Home = () => {
+const Home = (): JSX.Element => {
 	const [{ loading, error, matches, file }, { reset, checkFace, setError, loadModels }] = useFaceApi();
 	const [modelsLoaded, setModelsLoaded] = useState(false);
 	const [modelsLoading, setModelsLoading] = useState(false);
@@ -37,7 +37,7 @@ const Home = () => {
 					type="reset"
 					onClick={() => {
 						setModelsLoading(true);
-						loadModels().then(() => {
+						void loadModels().then(() => {
 							setModelsLoaded(true);
 							setModelsLoading(false);
 						});

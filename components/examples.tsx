@@ -1,9 +1,13 @@
-import PropTypes from "prop-types";
 import { Box, Grid } from "@mui/material";
 
 import { couple, mary, napo, others } from "../utils";
 
-const Examples = ({ loading, handleClick }) => (
+type ExampleProps = {
+	loading: boolean;
+	handleClick: (_: string) => void;
+};
+
+const Examples = ({ loading, handleClick }: ExampleProps): JSX.Element => (
 	<Grid
 		container
 		spacing={4}
@@ -18,7 +22,7 @@ const Examples = ({ loading, handleClick }) => (
 				transition: "opacity 500ms linear",
 				cursor: "not-allowed",
 				borderRadius: "1rem",
-				bgcolor: (t) => `${t.palette.primary.lightest}dd`,
+				bgcolor: "#fffdfcdd",
 				content: "\"\"",
 				position: "absolute",
 				top: 0,
@@ -31,7 +35,6 @@ const Examples = ({ loading, handleClick }) => (
 	>
 		<Grid item xs={6} sx={{ display: "flex", placeContent: "center" }}>
 			<a
-				disabled={loading}
 				href="#example"
 				onClick={(event) => {
 					event.preventDefault();
@@ -43,7 +46,6 @@ const Examples = ({ loading, handleClick }) => (
 		</Grid>
 		<Grid item xs={6} sx={{ display: "flex", placeContent: "center" }}>
 			<a
-				disabled={loading}
 				href="#example"
 				onClick={(event) => {
 					event.preventDefault();
@@ -55,7 +57,6 @@ const Examples = ({ loading, handleClick }) => (
 		</Grid>
 		<Grid item xs={6} sx={{ display: "flex", placeContent: "center" }}>
 			<a
-				disabled={loading}
 				href="#example"
 				onClick={(event) => {
 					event.preventDefault();
@@ -67,7 +68,6 @@ const Examples = ({ loading, handleClick }) => (
 		</Grid>
 		<Grid item xs={6} sx={{ display: "flex", placeContent: "center" }}>
 			<a
-				disabled={loading}
 				href="#example"
 				onClick={(event) => {
 					event.preventDefault();
@@ -79,7 +79,5 @@ const Examples = ({ loading, handleClick }) => (
 		</Grid>
 	</Grid>
 );
-
-Examples.propTypes = { loading: PropTypes.bool.isRequired, handleClick: PropTypes.func.isRequired };
 
 export default Examples;

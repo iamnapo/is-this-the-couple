@@ -17,7 +17,7 @@
 	"scripts": {
 		"build": "next build",
 		"dev": "next dev",
-		"lint": "eslint . --cache",
+		"lint": "eslint . --ext .ts,.tsx --cache",
 		"start": "next start",
 		"test": "npm run lint"
 	},
@@ -38,7 +38,7 @@
 	"prettier": "@iamnapo/prettier-config",
 	"eslintConfig": {
 		"extends": [
-			"iamnapo/with-react"
+			"iamnapo/with-react-typescript"
 		],
 		"rules": {
 			"unicorn/prefer-module": "off"
@@ -56,28 +56,31 @@
 		"@emotion/react": "^11.4.1",
 		"@emotion/server": "^11.4.0",
 		"@emotion/styled": "^11.3.0",
-		"@mui/material": "^5.0.0",
-		"@mui/styles": "^5.0.0",
+		"@mui/material": "^5.0.2",
+		"@mui/styles": "^5.0.1",
 		"critters": "^0.0.10",
 		"face-api.js": "^0.22.2",
 		"next": "^11.1.2",
 		"next-pwa": "^5.3.1",
-		"prop-types": "^15.7.2",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
-		"react-dropzone": "^11.4.0"
+		"react-dropzone": "^11.4.2"
 	},
 	"devDependencies": {
 		"@iamnapo/prettier-config": "^1.0.3",
+		"@iamnapo/tsconfig": "^1.0.0",
+		"@typescript-eslint/eslint-plugin": "^4.32.0",
+		"@typescript-eslint/parser": "^4.32.0",
 		"babel-plugin-import": "^1.13.3",
 		"eslint": "^7.32.0",
-		"eslint-config-iamnapo": "^16.1.0",
+		"eslint-config-iamnapo": "^17.1.0",
 		"eslint-plugin-import": "^2.24.2",
 		"eslint-plugin-jsx-a11y": "^6.4.1",
-		"eslint-plugin-react": "^7.25.2",
+		"eslint-plugin-react": "^7.26.0",
 		"eslint-plugin-react-hooks": "^4.2.0",
 		"eslint-plugin-unicorn": "^36.0.0",
-		"sass": "^1.41.1"
+		"sass": "^1.42.1",
+		"typescript": "^4.4.3"
 	},
 	"engines": {
 		"node": ">=14"

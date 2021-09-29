@@ -1,15 +1,23 @@
-import PropTypes from "prop-types";
 import { useDropzone } from "react-dropzone";
 import { Box, CircularProgress, Typography } from "@mui/material";
 import { useCallback } from "react";
 
-const DropArea = ({ handleDrop, handleError, loading = false, modelsLoaded = false }) => {
-	const onDrop = useCallback((accepted) => {
+type DropAreaProps = {
+	handleDrop: (_: string) => Promise<void>;
+	handleError: (_: string) => void;
+	loading?: boolean;
+	modelsLoaded?: boolean;
+};
+
+const DropArea = ({ handleDrop, handleError, loading = false, modelsLoaded = false }: DropAreaProps): JSX.Element => {
+	const onDrop = useCallback((accepted: Blob[]) => {
 		const file = accepted[0];
 		const reader = new FileReader();
-		reader.addEventListener("load", () => handleDrop(reader.result));
+		reader.addEventListener("load", () => {
+			void handleDrop(reader.result as string);
+		});
 		try {
-			reader.readAsDataURL(file);
+			reader.readAsDataURL(file as Blob);
 		} catch {
 			handleError("There was an error with the uploaded file.  Only JPG and PNG images are accepted.");
 		}
@@ -26,7 +34,7 @@ const DropArea = ({ handleDrop, handleError, loading = false, modelsLoaded = fal
 				marginTop: "2rem",
 				padding: "2rem",
 				"&:focus": {
-					boxShadow: (t) => `0 0 3pt 2pt ${t.palette.primary.darkest}`,
+					boxShadow: "0 0 3pt 2pt #0b2055",
 					outline: "none",
 				},
 			}}
@@ -46,13 +54,6 @@ const DropArea = ({ handleDrop, handleError, loading = false, modelsLoaded = fal
 				: <Typography align="center">{"Press the button above to load the models. ⬆️"}</Typography>}
 		</Box>
 	);
-};
-
-DropArea.propTypes = {
-	handleDrop: PropTypes.func.isRequired,
-	handleError: PropTypes.func.isRequired,
-	loading: PropTypes.bool,
-	modelsLoaded: PropTypes.bool.isRequired,
 };
 
 export default DropArea;

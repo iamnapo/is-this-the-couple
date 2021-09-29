@@ -1,12 +1,32 @@
+import { FaceDetection, WithFaceDescriptor } from "face-api.js";
 import { useCallback, useState } from "react";
 
 const FACIAL_MATCH_THRESHOLD = 0.6;
 
-const useFaceApi = () => {
+type UseFaceApiReturnType = [
+	{
+		loading: boolean
+		error:string | boolean
+		matches:{
+			isMary: boolean;
+			isNapo: boolean;
+			faceCount: number;
+		}
+		file: string | null
+	},
+	{
+		reset: () => void;
+		checkFace: (_: string) => Promise<void>;
+		setError: (_: string | boolean) => void;
+		loadModels: () => Promise<void>;
+	},
+];
+
+const useFaceApi = (): UseFaceApiReturnType => {
 	const [loading, setLoading] = useState(true);
 	const [matches, setMatches] = useState({ isMary: false, isNapo: false, faceCount: 0 });
-	const [file, setFile] = useState(null);
-	const [error, setError] = useState(false);
+	const [file, setFile] = useState<string | null>(null);
+	const [error, setError] = useState<string | boolean>(false);
 	const loadModels = useCallback(() => import("face-api.js").then(({ nets }) => Promise.all([
 		nets.tinyFaceDetector.loadFromUri("/models/"),
 		nets.faceLandmark68TinyNet.loadFromUri("/models/"),
@@ -20,7 +40,7 @@ const useFaceApi = () => {
 		setError(false);
 	};
 
-	const checkFace = async (uploadedFile) => {
+	const checkFace = async (uploadedFile: string) => {
 		setLoading(true);
 
 		if (!uploadedFile) {
@@ -42,7 +62,8 @@ const useFaceApi = () => {
 		}
 
 		// Find the faces in the uploaded images.
-		const [[mary], [napo], faces] = await Promise.all(
+		const [mary, napo, faces]: WithFaceDescriptor<FaceDetection>[][] = await Promise.all(
+			// @ts-expect-error face-api doesn’t return a Promise type
 			images.map((img) => detectAllFaces(img, new TinyFaceDetectorOptions()).withFaceLandmarks(true).withFaceDescriptors()),
 		);
 
@@ -52,13 +73,16 @@ const useFaceApi = () => {
 			return;
 		}
 
-		const getDistance = (ref, upload) => utils.round(euclideanDistance(ref.descriptor, upload.descriptor));
+		const getDistance = (
+			ref: WithFaceDescriptor<FaceDetection>,
+			upload: WithFaceDescriptor<FaceDetection>,
+		) => utils.round(euclideanDistance(ref.descriptor, upload.descriptor));
 
 		for (const face of faces) {
 			if (face.descriptor) {
-				if (getDistance(mary, face) < FACIAL_MATCH_THRESHOLD) {
+				if (getDistance(mary[0]!, face) < FACIAL_MATCH_THRESHOLD) {
 					setMatches((p) => ({ ...p, isMary: true }));
-				} else if (getDistance(napo, face) < FACIAL_MATCH_THRESHOLD) {
+				} else if (getDistance(napo[0]!, face) < FACIAL_MATCH_THRESHOLD) {
 					setMatches((p) => ({ ...p, isNapo: true }));
 				}
 			}
