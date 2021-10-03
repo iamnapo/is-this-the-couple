@@ -35,18 +35,18 @@ const Home = (): JSX.Element => {
 					variant="contained"
 					size="small"
 					type="reset"
+					sx={{
+						width: "50%",
+						m: "1rem auto",
+						display: "flex",
+						justifyContent: "center",
+					}}
 					onClick={() => {
 						setModelsLoading(true);
 						void loadModels().then(() => {
 							setModelsLoaded(true);
 							setModelsLoading(false);
 						});
-					}}
-					sx={{
-						width: "50%",
-						m: "1rem auto",
-						display: "flex",
-						justifyContent: "center",
 					}}
 				>
 					{"Load the models!"}
@@ -73,13 +73,13 @@ const Home = (): JSX.Element => {
 						variant="contained"
 						size="small"
 						type="reset"
-						onClick={reset}
 						sx={{
 							width: "50%",
 							m: "1rem auto",
 							display: "flex",
 							justifyContent: "center",
 						}}
+						onClick={reset}
 					>
 						{"Start over!"}
 					</Button>
@@ -92,7 +92,7 @@ const Home = (): JSX.Element => {
 						loading={loading}
 						modelsLoaded={modelsLoaded || modelsLoading}
 					/>
-					<Typography align="justify" variant="h5" gutterBottom sx={{ mt: "2rem", fontWeight: "bold" }}>{"Don’t have a lovely couple nearby?"}</Typography>
+					<Typography gutterBottom align="justify" variant="h5" sx={{ mt: "2rem", fontWeight: "bold" }}>{"Don’t have a lovely couple nearby?"}</Typography>
 					<Typography align="justify">{"Click one of the images below to see how it works!"}</Typography>
 					<Examples handleClick={checkFace} loading={loading || !(modelsLoaded || modelsLoading)} />
 				</>

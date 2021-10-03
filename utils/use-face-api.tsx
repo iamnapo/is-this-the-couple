@@ -5,14 +5,14 @@ const FACIAL_MATCH_THRESHOLD = 0.6;
 
 type UseFaceApiReturnType = [
 	{
-		loading: boolean
-		error:string | boolean
-		matches:{
+		loading: boolean;
+		error: string | boolean;
+		matches: {
 			isMary: boolean;
 			isNapo: boolean;
 			faceCount: number;
-		}
-		file: string | null
+		};
+		file: string | null;
 	},
 	{
 		reset: () => void;

@@ -2,7 +2,7 @@ import { Box, Link, Typography } from "@mui/material";
 
 const Footer = (): JSX.Element => (
 	<Box component="footer" mt="2rem" textAlign="justify">
-		<Typography variant="h5" gutterBottom sx={{ fontWeight: "bold" }}>
+		<Typography gutterBottom variant="h5" sx={{ fontWeight: "bold" }}>
 			{"What is this site?"}
 		</Typography>
 		<Typography variant="body2">
