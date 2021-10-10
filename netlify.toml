@@ -4,7 +4,6 @@ command = "npm run dev"
 [build]
 command = "npm run build"
 publish = "out"
-environment = { NPM_FLAGS = "--legacy-peer-deps" }
 
 [[headers]]
 for = "/*.pdf"
