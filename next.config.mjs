@@ -1,4 +1,4 @@
-const withPWA = require("next-pwa");
+import withPWA from "next-pwa";
 
 /**
  * @type {import("next/dist/server/config").NextConfig}
@@ -24,6 +24,7 @@ const config = {
 		return config;
 	},
 	generateBuildId: () => "build",
+	swcMinify: true,
 };
 
-module.exports = withPWA(config);
+export default withPWA(config);
