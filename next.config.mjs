@@ -10,7 +10,6 @@ const config = {
 	},
 	poweredByHeader: false,
 	reactStrictMode: true,
-	target: "serverless",
 	experimental: {
 		optimizeCss: true,
 		optimizeImages: true,

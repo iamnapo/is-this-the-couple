@@ -62,12 +62,11 @@ const useFaceApi = (): UseFaceApiReturnType => {
 		}
 
 		// Find the faces in the uploaded images.
-		const [mary, napo, faces]: WithFaceDescriptor<FaceDetection>[][] = await Promise.all(
-			// @ts-expect-error face-api doesn’t return a Promise type
+		const [mary, napo, faces] = await Promise.all(
 			images.map((img) => detectAllFaces(img, new TinyFaceDetectorOptions()).withFaceLandmarks(true).withFaceDescriptors()),
 		);
 
-		if (!faces[0] || !faces[0].descriptor) {
+		if (!faces?.[0]?.descriptor) {
 			setError("We couldn’t find a face in this image.");
 			setFile(uploadedFile);
 			return;
@@ -80,9 +79,11 @@ const useFaceApi = (): UseFaceApiReturnType => {
 
 		for (const face of faces) {
 			if (face.descriptor) {
-				if (getDistance(mary[0]!, face) < FACIAL_MATCH_THRESHOLD) {
+				// @ts-expect-error getDistance input type is incomplete
+				if (getDistance(mary[0], face) < FACIAL_MATCH_THRESHOLD) {
 					setMatches((p) => ({ ...p, isMary: true }));
-				} else if (getDistance(napo[0]!, face) < FACIAL_MATCH_THRESHOLD) {
+					// @ts-expect-error getDistance input type is incomplete
+				} else if (getDistance(napo[0], face) < FACIAL_MATCH_THRESHOLD) {
 					setMatches((p) => ({ ...p, isNapo: true }));
 				}
 			}
