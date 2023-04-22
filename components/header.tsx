@@ -8,9 +8,10 @@ const Header = (): JSX.Element => {
 		<header style={{ textAlign: "center" }}>
 			<Link href="/" onClick={reset}>
 				<img
-					src="https://res.cloudinary.com/iamnapo/image/upload/q_auto,f_auto/is-this-the-couple/logo"
-					alt="Is this the couple?"
+					loading="lazy"
 					style={{ maxWidth: "600px", width: "100%" }}
+					src="https://res.cloudinary.com/iamnapo/image/upload/f_auto,q_auto,w_600/is-this-the-couple/logo"
+					alt="Is this the couple?"
 				/>
 			</Link>
 		</header>

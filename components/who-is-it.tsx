@@ -21,7 +21,12 @@ const WhoIsIt = ({ isNapo, isMary, faceCount, file }: WhoIsItProps): JSX.Element
 		<Typography variant="h4" align="center" fontSize="1.75rem" mt="1rem">
 			{getHeading(isNapo, isMary, faceCount)}
 		</Typography>
-		<img src={file} alt="uploaded file" style={{ display: "block", margin: "1rem auto", width: "50%" }} />
+		<img
+			loading="lazy"
+			src={file}
+			alt="uploaded file"
+			style={{ display: "block", margin: "1rem auto", width: "50%" }}
+		/>
 	</>
 );
 

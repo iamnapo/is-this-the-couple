@@ -1,18 +1,35 @@
 import * as React from "react";
-import { CacheProvider } from "@emotion/react";
-import createCache from "@emotion/cache";
-import NextDocument, { Html, Head, Main, NextScript } from "next/document";
-import { ServerStyleSheets } from "@mui/styles";
+import NextDocument, { Html, Head, Main, NextScript, DocumentContext } from "next/document";
+import { AppType } from "next/app";
 import createEmotionServer from "@emotion/server/create-instance";
+import { EmotionCache } from "@emotion/cache";
 
-const getCache = () => {
-	const cache = createCache({ key: "css", prepend: true });
-	cache.compat = true;
-	return cache;
-};
+import { createEmotionCache } from "../utils";
 
-export default class Document extends NextDocument {
+export default class Document extends NextDocument<{ emotionStyleTags: JSX.Element[] }> {
+	static override async getInitialProps(ctx: DocumentContext) {
+		const originalRenderPage = ctx.renderPage;
+		const cache = createEmotionCache();
+		const emotionServer = createEmotionServer(cache);
+		ctx.renderPage = () => originalRenderPage({
+			enhanceApp: (App: React.ComponentType<React.ComponentProps<AppType> & { emotionCache?: EmotionCache }>) => (props) => (
+				<App emotionCache={cache} {...props} />
+			),
+		});
+		const initialProps = await NextDocument.getInitialProps(ctx);
+		const emotionStyles = emotionServer.extractCriticalToChunks(initialProps.html);
+		const emotionStyleTags = emotionStyles.styles.map((style) => (
+			<style
+				key={style.key}
+				dangerouslySetInnerHTML={{ __html: style.css }} // eslint-disable-line react/no-danger
+				data-emotion={`${style.key} ${style.ids.join(" ")}`}
+			/>
+		));
+		return { ...initialProps, emotionStyleTags };
+	}
+
 	override render(): JSX.Element {
+		const { emotionStyleTags } = this.props;
 		return (
 			<Html lang="en">
 				<Head>
@@ -25,6 +42,8 @@ export default class Document extends NextDocument {
 					<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
 					<meta name="theme-color" content="#000000" />
 					<link rel="manifest" href="manifest.json" />
+					<meta name="emotion-insertion-point" content="" />
+					{ emotionStyleTags }
 				</Head>
 				<body>
 					<Main />
@@ -34,36 +53,3 @@ export default class Document extends NextDocument {
 		);
 	}
 }
-
-Document.getInitialProps = async (ctx) => {
-	const sheets = new ServerStyleSheets();
-	const originalRenderPage = ctx.renderPage;
-
-	const cache = getCache();
-	const emotionServer = createEmotionServer(cache);
-
-	ctx.renderPage = () => originalRenderPage({
-		enhanceApp: (App) => (props) => sheets.collect(<App {...props} />),
-		enhanceComponent: (Component) => (props) => (
-			<CacheProvider value={cache}>
-				<Component {...props} />
-			</CacheProvider>
-		),
-	});
-
-	const initialProps = await NextDocument.getInitialProps(ctx);
-	const emotionStyles = emotionServer.extractCriticalToChunks(initialProps.html);
-	const emotionStyleTags = emotionStyles.styles.map((style) => (
-		<style
-			key={style.key}
-			data-emotion={`${style.key} ${style.ids.join(" ")}`}
-			// eslint-disable-next-line react/no-danger
-			dangerouslySetInnerHTML={{ __html: style.css }}
-		/>
-	));
-
-	return {
-		...initialProps,
-		styles: [...React.Children.toArray(initialProps.styles), sheets.getStyleElement(), ...emotionStyleTags],
-	};
-};

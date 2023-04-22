@@ -1,20 +1,9 @@
 import withPWA from "next-pwa";
 
-/**
- * @type {import("next/dist/server/config").NextConfig}
- */
+/** @type {import("next").NextConfig} */
 const config = {
-	pwa: {
-		dest: "public",
-		disable: process.env.NODE_ENV !== "production",
-	},
 	poweredByHeader: false,
 	reactStrictMode: true,
-	experimental: {
-		optimizeCss: true,
-		optimizeImages: true,
-		esmExternals: true,
-	},
 	eslint: {
 		ignoreDuringBuilds: true,
 	},
@@ -22,8 +11,16 @@ const config = {
 		if (!isServer) config.resolve.fallback.fs = false;
 		return config;
 	},
+	compiler: {
+		reactRemoveProperties: true,
+	},
 	generateBuildId: () => "build",
-	swcMinify: true,
+	images: {
+		remotePatterns: [{ protocol: "https", hostname: "res.cloudinary.com", pathname: "/iamnapo/**" }],
+	},
 };
 
-export default withPWA(config);
+export default withPWA({
+	dest: "public",
+	disable: process.env.NODE_ENV !== "production",
+})(config);

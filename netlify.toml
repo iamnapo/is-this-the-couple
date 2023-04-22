@@ -1,14 +1,6 @@
 [dev]
-command = "npm run dev"
-
-[build]
-command = "npm run build"
-publish = "out"
+	command = "npm run dev"
 
 [[headers]]
-for = "/*.pdf"
-values = { Cache-Control = "no-store" }
-
-[[headers]]
-for = "/models/*"
-values = { Cache-Control = "public,max-age=365000000,immutable" }
+	for = "/models/*"
+	values = { Cache-Control = "public,max-age=365000000,immutable" }
