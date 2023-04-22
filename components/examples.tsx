@@ -4,7 +4,7 @@ import { couple, mary, napo, others } from "../utils";
 
 type ExampleProps = {
 	loading: boolean;
-	handleClick: (_: string) => void;
+	handleClick: (_: string) => Promise<void>;
 };
 
 const Examples = ({ loading, handleClick }: ExampleProps): JSX.Element => (
@@ -38,7 +38,7 @@ const Examples = ({ loading, handleClick }: ExampleProps): JSX.Element => (
 				href="#example"
 				onClick={(event) => {
 					event.preventDefault();
-					handleClick(mary);
+					void handleClick(mary);
 				}}
 			>
 				<Box component="img" sx={{ maxHeight: "150px" }} src={mary} alt="Choose this to see who’s in it." />
@@ -49,7 +49,7 @@ const Examples = ({ loading, handleClick }: ExampleProps): JSX.Element => (
 				href="#example"
 				onClick={(event) => {
 					event.preventDefault();
-					handleClick(napo);
+					void handleClick(napo);
 				}}
 			>
 				<Box component="img" sx={{ maxHeight: "150px" }} src={napo} alt="Choose this to see who’s in it." />
@@ -60,7 +60,7 @@ const Examples = ({ loading, handleClick }: ExampleProps): JSX.Element => (
 				href="#example"
 				onClick={(event) => {
 					event.preventDefault();
-					handleClick(couple);
+					void handleClick(couple);
 				}}
 			>
 				<Box component="img" sx={{ maxHeight: "150px" }} src={couple} alt="Choose this to see who’s in it." />
@@ -71,7 +71,7 @@ const Examples = ({ loading, handleClick }: ExampleProps): JSX.Element => (
 				href="#example"
 				onClick={(event) => {
 					event.preventDefault();
-					handleClick(others);
+					void handleClick(others);
 				}}
 			>
 				<Box component="img" sx={{ maxHeight: "150px" }} src={others} alt="Choose this to see who’s in it." />
