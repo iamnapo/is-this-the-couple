@@ -23,7 +23,7 @@ const theme = createTheme({
 		},
 	},
 	typography: {
-		fontFamily: ["Dosis", "-apple-system", "BlinkMacSystemFont", "Arial", "sans-serif"].join(","),
+		fontFamily: ["var(--dosis)", "-apple-system", "BlinkMacSystemFont", "Arial", "sans-serif"].join(","),
 	},
 });
 

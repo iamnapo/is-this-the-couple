@@ -4,7 +4,7 @@ import { AppType } from "next/app";
 import createEmotionServer from "@emotion/server/create-instance";
 import { EmotionCache } from "@emotion/cache";
 
-import { createEmotionCache } from "../utils";
+import { createEmotionCache, dosis } from "../utils";
 
 export default class Document extends NextDocument<{ emotionStyleTags: JSX.Element[] }> {
 	static override async getInitialProps(ctx: DocumentContext) {
@@ -31,10 +31,8 @@ export default class Document extends NextDocument<{ emotionStyleTags: JSX.Eleme
 	override render(): JSX.Element {
 		const { emotionStyleTags } = this.props;
 		return (
-			<Html lang="en">
+			<Html lang="en" className={dosis.variable}>
 				<Head>
-					<link rel="preconnect" href="https://fonts.gstatic.com" />
-					<link href="https://fonts.googleapis.com/css2?family=Dosis&display=swap" rel="stylesheet" />
 					<meta charSet="utf-8" />
 					<meta name="description" content="Upload an image of them and we’ll tell you which nerd you’re dealing with." />
 					<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
@@ -43,7 +41,7 @@ export default class Document extends NextDocument<{ emotionStyleTags: JSX.Eleme
 					<meta name="theme-color" content="#000000" />
 					<link rel="manifest" href="manifest.json" />
 					<meta name="emotion-insertion-point" content="" />
-					{ emotionStyleTags }
+					{emotionStyleTags}
 				</Head>
 				<body>
 					<Main />
