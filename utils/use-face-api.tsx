@@ -1,4 +1,4 @@
-import { FaceDetection, WithFaceDescriptor } from "face-api.js";
+import type { FaceDetection, WithFaceDescriptor } from "face-api.js";
 import { useCallback, useState } from "react";
 
 const FACIAL_MATCH_THRESHOLD = 0.6;

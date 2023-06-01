@@ -18,9 +18,9 @@ const Home = (): JSX.Element => {
 					<Typography align="justify">
 						{"Are there a bearded man and a lovely lady front of you? Are they talking at length about code or pastry? "}
 						{"Not sure if it’s "}
-						<Link href="http://iamnapo.me">{"Napoleon Oikonomou"}</Link>
+						<Link href="https://iamnapo.me">{"Napoleon Oikonomou"}</Link>
 						{" and "}
-						<Link href="http://marykouvela.com">{"Mary Kouvela"}</Link>
+						<Link href="https://marykouvela.com">{"Mary Kouvela"}</Link>
 						{"?"}
 					</Typography>
 					<Typography mt="1rem">

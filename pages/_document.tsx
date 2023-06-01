@@ -1,8 +1,8 @@
 import * as React from "react";
-import NextDocument, { Html, Head, Main, NextScript, DocumentContext } from "next/document";
-import { AppType } from "next/app";
+import NextDocument, { Html, Head, Main, NextScript, type DocumentContext } from "next/document";
+import type { AppType } from "next/app";
 import createEmotionServer from "@emotion/server/create-instance";
-import { EmotionCache } from "@emotion/cache";
+import type { EmotionCache } from "@emotion/cache";
 
 import { createEmotionCache, dosis } from "../utils";
 

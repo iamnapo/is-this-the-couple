@@ -69,3 +69,6 @@ public/sw.js.map
 
 # Local Netlify folder
 .netlify
+
+tsconfig.tsbuildinfo
+```
