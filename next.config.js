@@ -1,4 +1,6 @@
-import withPWA from "next-pwa";
+// @ts-check
+
+import withPWA from "@ducanh2912/next-pwa";
 
 /** @type {import("next").NextConfig} */
 const config = {
@@ -22,5 +24,6 @@ const config = {
 
 export default withPWA({
 	dest: "public",
-	disable: process.env.NODE_ENV !== "production",
+	cacheOnFrontEndNav: true,
+	aggressiveFrontEndNavCaching: true,
 })(config);
