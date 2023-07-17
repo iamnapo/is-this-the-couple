@@ -11,13 +11,13 @@ type DropAreaProps = {
 
 const DropArea = ({ handleDrop, handleError, loading = false, modelsLoaded = false }: DropAreaProps): JSX.Element => {
 	const onDrop = useCallback((accepted: Blob[]) => {
-		const file = accepted[0];
+		const file = accepted[0]!;
 		const reader = new FileReader();
 		reader.addEventListener("load", () => {
 			void handleDrop(reader.result as string);
 		});
 		try {
-			reader.readAsDataURL(file as Blob);
+			reader.readAsDataURL(file);
 		} catch {
 			handleError("There was an error with the uploaded file.  Only JPG and PNG images are accepted.");
 		}
