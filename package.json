@@ -42,26 +42,26 @@
 		]
 	},
 	"dependencies": {
-		"@ducanh2912/next-pwa": "^9.2.1",
+		"@ducanh2912/next-pwa": "^9.7.2",
 		"@emotion/cache": "^11.11.0",
 		"@emotion/react": "^11.11.1",
 		"@emotion/server": "^11.11.0",
 		"@emotion/styled": "^11.11.0",
-		"@mui/material": "^5.14.0",
+		"@mui/material": "^5.14.14",
 		"face-api.js": "^0.22.2",
-		"next": "^13.4.10",
-		"node-fetch": "^3.3.1",
+		"next": "^13.5.6",
+		"node-fetch": "^3.3.2",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-dropzone": "^14.2.3",
-		"sass": "^1.63.6"
+		"sass": "^1.69.4"
 	},
 	"devDependencies": {
 		"@iamnapo/prettier-config": "^1.0.3",
 		"@iamnapo/tsconfig": "^4.0.0",
-		"eslint": "^8.45.0",
-		"eslint-config-iamnapo": "^32.0.0",
-		"typescript": "^5.1.6"
+		"eslint": "^8.51.0",
+		"eslint-config-iamnapo": "^32.2.0",
+		"typescript": "^5.2.2"
 	},
 	"overrides": {
 		"node-fetch": "$node-fetch"
