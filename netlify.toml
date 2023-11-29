@@ -1,5 +1,5 @@
 [dev]
-	command = "pnpm run dev"
+	command = "npm run dev"
 
 [[headers]]
 	for = "/models/*"
