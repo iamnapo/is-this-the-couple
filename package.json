@@ -59,6 +59,7 @@
 	"devDependencies": {
 		"@iamnapo/prettier-config": "^1.0.3",
 		"@iamnapo/tsconfig": "^4.0.0",
+		"@types/react": "^18.2.39",
 		"eslint": "^8.54.0",
 		"eslint-config-iamnapo": "^33.0.0",
 		"typescript": "^5.3.2"
