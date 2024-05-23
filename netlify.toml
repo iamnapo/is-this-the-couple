@@ -1,6 +1,9 @@
 [dev]
 	command = "npm run dev"
 
+[build]
+	edge_functions = "edge-functions"
+
 [[headers]]
 	for = "/models/*"
 	values = { Cache-Control = "public,max-age=365000000,immutable" }
