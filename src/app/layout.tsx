@@ -10,16 +10,16 @@ import LayoutClient from "#components/layout-client";
 
 import theme from "../theme";
 
-const dosis = Dosis({ subsets: ["latin"], weight: ["400"], variable: "--dosis" });
+const dosis = Dosis({ subsets: ["latin"], weight: ["400", "700"], variable: "--dosis" });
 
 const Layout = ({ children }: PropsWithChildren) => (
 	<html lang="en">
-		<body className={dosis.variable}>
+		<body className={dosis.variable} style={{ display: "grid" }}>
 			<AppRouterCacheProvider>
 				<ThemeProvider theme={theme}>
 					<CssBaseline />
 					<Header />
-					<main>{children}</main>
+					<main style={{ display: "grid" }}>{children}</main>
 					<Footer />
 				</ThemeProvider>
 			</AppRouterCacheProvider>

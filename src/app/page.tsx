@@ -15,7 +15,7 @@ const Home = () => {
 	const [modelsLoading, setModelsLoading] = useState(false);
 
 	return (
-		<Box mx={2} maxWidth={700} justifySelf="center" textAlign="justify">
+		<Box mx={2} maxWidth={700} justifySelf="center" textAlign="justify" display="grid">
 			{!file && (
 				<>
 					<Typography>
