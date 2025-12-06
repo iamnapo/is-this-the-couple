@@ -1,13 +1,15 @@
 import { Box, Grid } from "@mui/material";
 
-import { couple, mary, napo, others } from "../utils";
+import type { FC } from "react";
 
-type ExampleProps = {
-	loading: boolean;
-	handleClick: (_: string) => Promise<void>;
-};
+const napo = "https://res.cloudinary.com/iamnapo/image/upload/c_thumb,f_auto,g_north_west,h_300,q_auto/is-this-the-couple/napo";
+const mary = "https://res.cloudinary.com/iamnapo/image/upload/c_thumb,f_auto,g_north_west,h_300,q_auto/is-this-the-couple/mary";
+const couple = "https://res.cloudinary.com/iamnapo/image/upload/c_thumb,f_auto,g_north_west,h_300,q_auto/is-this-the-couple/couple";
+const others = "https://res.cloudinary.com/iamnapo/image/upload/c_thumb,f_auto,g_north_west,w_250,q_auto/is-this-the-couple/others";
 
-const Examples = ({ loading, handleClick }: ExampleProps): JSX.Element => (
+type ExampleProps = { loading: boolean; handleClick: (_: string) => Promise<void> };
+
+const Examples: FC<ExampleProps> = ({ loading, handleClick }) => (
 	<Grid
 		container
 		spacing={4}
@@ -33,7 +35,7 @@ const Examples = ({ loading, handleClick }: ExampleProps): JSX.Element => (
 			},
 		}}
 	>
-		<Grid item xs={6} sx={{ display: "flex", placeContent: "center" }}>
+		<Grid size={6} sx={{ display: "flex", placeContent: "center" }}>
 			<a
 				href="#example"
 				onClick={(event) => {
@@ -44,7 +46,7 @@ const Examples = ({ loading, handleClick }: ExampleProps): JSX.Element => (
 				<Box component="img" sx={{ maxHeight: "150px" }} src={mary} alt="Choose this to see who’s in it." />
 			</a>
 		</Grid>
-		<Grid item xs={6} sx={{ display: "flex", placeContent: "center" }}>
+		<Grid size={6} sx={{ display: "flex", placeContent: "center" }}>
 			<a
 				href="#example"
 				onClick={(event) => {
@@ -55,7 +57,7 @@ const Examples = ({ loading, handleClick }: ExampleProps): JSX.Element => (
 				<Box component="img" sx={{ maxHeight: "150px" }} src={napo} alt="Choose this to see who’s in it." />
 			</a>
 		</Grid>
-		<Grid item xs={6} sx={{ display: "flex", placeContent: "center" }}>
+		<Grid size={6} sx={{ display: "flex", placeContent: "center" }}>
 			<a
 				href="#example"
 				onClick={(event) => {
@@ -66,7 +68,7 @@ const Examples = ({ loading, handleClick }: ExampleProps): JSX.Element => (
 				<Box component="img" sx={{ maxHeight: "150px" }} src={couple} alt="Choose this to see who’s in it." />
 			</a>
 		</Grid>
-		<Grid item xs={6} sx={{ display: "flex", placeContent: "center" }}>
+		<Grid size={6} sx={{ display: "flex", placeContent: "center" }}>
 			<a
 				href="#example"
 				onClick={(event) => {

@@ -1,5 +1,6 @@
-import type { FaceDetection, WithFaceDescriptor } from "face-api.js";
 import { useCallback, useState } from "react";
+
+import type { FaceDetection, WithFaceDescriptor } from "face-api.js";
 
 const FACIAL_MATCH_THRESHOLD = 0.6;
 
@@ -7,11 +8,7 @@ type UseFaceApiReturnType = [
 	{
 		loading: boolean;
 		error: string | boolean;
-		matches: {
-			isMary: boolean;
-			isNapo: boolean;
-			faceCount: number;
-		};
+		matches: { isMary: boolean; isNapo: boolean; faceCount: number };
 		file: string | null;
 	},
 	{
@@ -27,11 +24,18 @@ const useFaceApi = (): UseFaceApiReturnType => {
 	const [matches, setMatches] = useState({ isMary: false, isNapo: false, faceCount: 0 });
 	const [file, setFile] = useState<string | null>(null);
 	const [error, setError] = useState<string | boolean>(false);
-	const loadModels = useCallback(() => import("face-api.js").then(({ nets }) => Promise.all([
-		nets.tinyFaceDetector.loadFromUri("/models/"),
-		nets.faceLandmark68TinyNet.loadFromUri("/models/"),
-		nets.faceRecognitionNet.loadFromUri("/models/"),
-	])).then(() => setLoading(false)), []);
+	const loadModels = useCallback(
+		() =>
+			import("face-api.js")
+				.then(({ nets }) =>
+					Promise.all([
+						nets.tinyFaceDetector.loadFromUri("/models/"),
+						nets.faceLandmark68TinyNet.loadFromUri("/models/"),
+						nets.faceRecognitionNet.loadFromUri("/models/"),
+					]))
+				.then(() => setLoading(false)),
+		[],
+	);
 
 	const reset = () => {
 		setLoading(false);
@@ -72,10 +76,8 @@ const useFaceApi = (): UseFaceApiReturnType => {
 			return;
 		}
 
-		const getDistance = (
-			ref: WithFaceDescriptor<FaceDetection>,
-			upload: WithFaceDescriptor<FaceDetection>,
-		) => utils.round(euclideanDistance(ref.descriptor, upload.descriptor));
+		const getDistance = (ref: WithFaceDescriptor<FaceDetection>, upload: WithFaceDescriptor<FaceDetection>) =>
+			utils.round(euclideanDistance(ref.descriptor, upload.descriptor));
 
 		for (const face of faces) {
 			if (face.descriptor) {
@@ -95,7 +97,10 @@ const useFaceApi = (): UseFaceApiReturnType => {
 		setError(false);
 	};
 
-	return [{ loading, error, matches, file }, { reset, checkFace, setError, loadModels }];
+	return [
+		{ loading, error, matches, file },
+		{ reset, checkFace, setError, loadModels },
+	];
 };
 
 export default useFaceApi;

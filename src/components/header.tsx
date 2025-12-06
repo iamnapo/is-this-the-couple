@@ -1,8 +1,10 @@
+"use client";
+
 import { Link } from "@mui/material";
 
-import { useFaceApi } from "../utils";
+import useFaceApi from "#hooks/use-face-api";
 
-const Header = (): JSX.Element => {
+const Header = () => {
 	const [, { reset }] = useFaceApi();
 	return (
 		<header style={{ textAlign: "center" }}>

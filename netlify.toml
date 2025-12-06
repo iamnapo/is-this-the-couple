@@ -1,8 +1,10 @@
 [dev]
-	command = "npm run dev"
+	command = "bun dev"
 
 [build]
-	edge_functions = "edge-functions"
+	command = "bun run build"
+	[build.environment]
+		NEXT_USE_NETLIFY_EDGE = "true"
 
 [[headers]]
 	for = "/models/*"

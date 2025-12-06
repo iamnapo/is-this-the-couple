@@ -5,18 +5,17 @@ on: push
 jobs:
   ci:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: ⬇️ Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
-      - name: ⎔ Setup node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
+      - name: ⎔ Setup Bun
+        uses: oven-sh/setup-bun@v2
 
       - name: 📥 Download deps
-        run: npm ci
+        run: bun ci
 
       - name: 🧪 Run test script
-        run: npm test
+        run: bun run test

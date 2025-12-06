@@ -1,7 +1,7 @@
 import { Box, Link, Typography } from "@mui/material";
 
-const Footer = (): JSX.Element => (
-	<Box component="footer" mt="2rem" textAlign="justify">
+const Footer = () => (
+	<Box component="footer" mt={4} mx={2} textAlign="justify" maxWidth={700} justifySelf="center">
 		<Typography gutterBottom variant="h5" sx={{ fontWeight: "bold" }}>
 			{"What is this site?"}
 		</Typography>
@@ -20,7 +20,7 @@ const Footer = (): JSX.Element => (
 			<Link href="https://twitter.com/gantlaborde">{"Gant Laborde"}</Link>
 			{"."}
 		</Typography>
-		<Typography mt="2rem" align="center" variant="body2">
+		<Typography gutterBottom mt={4} align="center" variant="body2">
 			{"Made with ❤️ by "}
 			<Link href="https:/iamnapo.me">{"Napoleon"}</Link>
 			{" · "}
